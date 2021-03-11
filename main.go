@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Chas")
+	fmt.Println("Chasz")
 	x := Multp()
 	fmt.Println("x = ", x)
 
