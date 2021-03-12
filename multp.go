@@ -1,6 +1,6 @@
 package main
 
 func Multp() int {
-	return 256
+	return 512
 
 }
