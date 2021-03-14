@@ -2,5 +2,5 @@ package main
 
 func Sortie() {
 	x := 0
-	x *= 2
+	x *= 3
 }
