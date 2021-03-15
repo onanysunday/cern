@@ -1,12 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
 	fmt.Println("Chas Yo")
 	x := Multp()
 	fmt.Println("x= ", x)
-	k := readCsvFile("C:/Users/onany/OneDrive/Documents/krud/sort.csv", 1)
-	fmt.Println("k = ", k)
+	s := readCsvFile("C:/Users/onany/OneDrive/Documents/krud/sort.csv", 1)
+	n = strconv.Atoi(s)
+	fmt.Println("n = ", n)
 
 }
