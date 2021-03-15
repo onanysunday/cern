@@ -12,7 +12,7 @@ func readCsvFile(filepath string, skiplines int) [][]string {
 		log.Fatal("Unable to read input file "+filepath, err)
 	}
 	defer f.Close()
-	// 1031
+	// 1032
 	csvReader := csv.NewReader(f)
 	for i := 0; i < skiplines; i++ {
 		topline, err1 := csvReader.Read()
