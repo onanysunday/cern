@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
 	"log"
 	"os"
 )
@@ -26,8 +25,8 @@ func readCsvFile(filepath string, skiplines int) [][]string {
 	if err != nil {
 		log.Fatal("Unable to parse file as CSV for "+filepath, err)
 	}
-	k := (records[0][0])
-	fmt.Println("k = ", k)
+	//k :=  (records[0][0])
+	//fmt.Println("k = ", k)
 
 	return records
 }
