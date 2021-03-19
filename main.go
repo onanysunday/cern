@@ -13,5 +13,6 @@ func main() {
 	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort_1line.csv", 1)
 	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort_empty.csv", 1)
 	s = s
+	fmt.Println(s)
 
 }
