@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"fmt"
 	"log"
 	"os"
 )
@@ -27,6 +28,14 @@ func readCsvFile(filepath string, skiplines int) [][]string {
 	}
 	//k :=  (records[0][0])
 	//fmt.Println("k = ", k)
+	fmt.Println("Size of array = ", len(records))
+	fmt.Println("Size of arrayz = ", len(records[0]))
+
+	return records
+}
+
+func readCsvFile2d(filepath string, skiplines int) [][]string {
+	records := readCsvFile(filepath, skiplines)
 
 	return records
 }
