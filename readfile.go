@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 )
 
 func readCsvFile(filepath string, skiplines int) [][]string {
@@ -28,8 +29,8 @@ func readCsvFile(filepath string, skiplines int) [][]string {
 	}
 	//k :=  (records[0][0])
 	//fmt.Println("k = ", k)
-	fmt.Println("Size of array = ", len(records))
-	fmt.Println("Size of arrayz = ", len(records[0]))
+	//fmt.Println("Size of array = ", len(records))
+	//fmt.Println("Size of arrayz = ", len(records[0]))
 
 	return records
 }
@@ -43,12 +44,32 @@ func readCsvFile2d(filepath string, skiplines int) [][]string {
 func readCsvFile1d(filepath string, skiplines int) []string {
 	records := readCsvFile(filepath, skiplines)
 
-	//recordSize := len(records)
+	recordSize := len(records)
 
-	fmt.Println("rec = ", records[0:])
+	var Rec1D = make([]string, recordSize)
+	for i := 0; i < len(Rec1D); i++ {
+		Rec1D[i] = records[i][0]
+	}
+	//fmt.Println("rec = ", Rec1D)
+	return Rec1D
+}
 
-	var rec_1d []string = records[0:2][0]
+func readCsvFile1d_int(filepath string, skiplines int) []int {
+	records := readCsvFile(filepath, skiplines)
 
-	return rec_1d
+	recordSize := len(records)
 
+	var Rec1D = make([]int, recordSize)
+	for i := 0; i < len(Rec1D); i++ {
+		//Rec1D[i] = strconv.Atoi(records[i][0])
+		x, serr := strconv.Atoi(records[i][0])
+		if serr != nil {
+			fmt.Println("Convert Error", records[i][0])
+		}
+
+		serr = serr
+		Rec1D[i] = x
+	}
+	fmt.Println("rec = ", Rec1D)
+	return Rec1D
 }
