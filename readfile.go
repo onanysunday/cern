@@ -39,3 +39,16 @@ func readCsvFile2d(filepath string, skiplines int) [][]string {
 
 	return records
 }
+
+func readCsvFile1d(filepath string, skiplines int) []string {
+	records := readCsvFile(filepath, skiplines)
+
+	//recordSize := len(records)
+
+	fmt.Println("rec = ", records[0:])
+
+	var rec_1d []string = records[0:2][0]
+
+	return rec_1d
+
+}
