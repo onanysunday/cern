@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func readCsvFile(filepath string, skiplines int) [][]string {
+func readCsvFile(filepath string, skiplines int) ([][]string, int) {
 	f, err := os.Open(filepath)
 	if err != nil {
 		log.Fatal("Unable to read input file "+filepath, err)
@@ -16,6 +16,10 @@ func readCsvFile(filepath string, skiplines int) [][]string {
 	defer f.Close()
 	// 1032
 	csvReader := csv.NewReader(f)
+	csvReader.Comma = '\t' // Use tab-delimited instead of comma
+	csvReader.Comma = ','  // not necessary - comma is default
+	fieldsPerRecord := csvReader.FieldsPerRecord
+	//csvReader.FieldsPerRecord = 4
 	for i := 0; i < skiplines; i++ {
 		topline, err1 := csvReader.Read()
 		topline = topline
@@ -32,19 +36,22 @@ func readCsvFile(filepath string, skiplines int) [][]string {
 	//fmt.Println("Size of array = ", len(records))
 	//fmt.Println("Size of arrayz = ", len(records[0]))
 
-	return records
+	return records, fieldsPerRecord
 }
 
 func readCsvFile2d(filepath string, skiplines int) [][]string {
-	records := readCsvFile(filepath, skiplines)
+	records, fieldsPerRecord := readCsvFile(filepath, skiplines)
+	fmt.Println("Records", records)
+	fmt.Println("fieldsPerRecord", fieldsPerRecord)
 
 	return records
 }
 
-func readCsvFile1d(filepath string, skiplines int) []string {
-	records := readCsvFile(filepath, skiplines)
+func zzz_readCsvFile1d(filepath string, skiplines int) []string {
+	records, fieldsPerRecord := readCsvFile(filepath, skiplines)
 
 	recordSize := len(records)
+	fieldsPerRecord = fieldsPerRecord
 
 	var Rec1D = make([]string, recordSize)
 	for i := 0; i < len(Rec1D); i++ {
@@ -54,10 +61,11 @@ func readCsvFile1d(filepath string, skiplines int) []string {
 	return Rec1D
 }
 
-func readCsvFile1d_int(filepath string, skiplines int) []int {
-	records := readCsvFile(filepath, skiplines)
+func zzz_readCsvFile1d_int(filepath string, skiplines int) []int {
+	records, fieldsPerRecord := readCsvFile(filepath, skiplines)
 
 	recordSize := len(records)
+	fieldsPerRecord = fieldsPerRecord
 
 	var Rec1D = make([]int, recordSize)
 	for i := 0; i < len(Rec1D); i++ {
