@@ -33,7 +33,7 @@ func main() {
 	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_5.txt"
 	skiplines := 1
 	//records := readCsvFile(filename, skiplines)
-	records := readCsvFile2d(filename, skiplines)
+	records := readCsvFile2d(filename, ',', skiplines)
 	recordSize := len(records)
 	fmt.Println("#Records = ", recordSize)
 	fmt.Printf("records type ' %T\n", records)

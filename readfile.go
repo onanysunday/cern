@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func readCsvFile(filepath string, skiplines int) ([][]string, int) {
+func readCsvFile(filepath string, comma rune, skiplines int) ([][]string, int) {
 	f, err := os.Open(filepath)
 	if err != nil {
 		log.Fatal("Unable to read input file "+filepath, err)
@@ -16,9 +16,8 @@ func readCsvFile(filepath string, skiplines int) ([][]string, int) {
 	defer f.Close()
 	// 1032
 	csvReader := csv.NewReader(f)
-	csvReader.Comma = '\t' // Use tab-delimited instead of comma
-	csvReader.Comma = ','  // not necessary - comma is default
-	fieldsPerRecord := csvReader.FieldsPerRecord
+	csvReader.Comma = comma       // can be ',' or '\t' or '|' or whatever
+	csvReader.FieldsPerRecord = 0 // tell csvReader to return the number of fields separated by csvReader.Comma
 	//csvReader.FieldsPerRecord = 4
 	for i := 0; i < skiplines; i++ {
 		topline, err1 := csvReader.Read()
@@ -36,17 +35,35 @@ func readCsvFile(filepath string, skiplines int) ([][]string, int) {
 	//fmt.Println("Size of array = ", len(records))
 	//fmt.Println("Size of arrayz = ", len(records[0]))
 
-	return records, fieldsPerRecord
+	return records, csvReader.FieldsPerRecord
 }
 
-func readCsvFile2d(filepath string, skiplines int) [][]string {
-	records, fieldsPerRecord := readCsvFile(filepath, skiplines)
+func readCsvFile2d(filepath string, comma rune, skiplines int) [][]string {
+	records, fieldsPerRecord := readCsvFile(filepath, comma, skiplines)
 	fmt.Println("Records", records)
 	fmt.Println("fieldsPerRecord", fieldsPerRecord)
 
+	recordSize := len(records)
+	_ = recordSize
+
+	fmt.Printf("mat = %v  %T\n", mat, mat)
+
+	mat := make([][]int, 0)
+
+	for row := 0; row < recordSize; row++ {
+		lin := make([]int, 0)
+		for col := 0; col < fieldsPerRecord; col++ {
+			lin[col], _ = strconv.Atoi(records[row][col])
+		}
+		mat = append(mat, lin)
+		fmt.Println(lin)
+	}
+
+	fmt.Println("mat = ", mat)
 	return records
 }
 
+/*
 func zzz_readCsvFile1d(filepath string, skiplines int) []string {
 	records, fieldsPerRecord := readCsvFile(filepath, skiplines)
 
@@ -81,3 +98,4 @@ func zzz_readCsvFile1d_int(filepath string, skiplines int) []int {
 	fmt.Println("rec = ", Rec1D)
 	return Rec1D
 }
+*/
