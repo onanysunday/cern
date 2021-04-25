@@ -38,29 +38,33 @@ func readCsvFile(filepath string, comma rune, skiplines int) ([][]string, int) {
 	return records, csvReader.FieldsPerRecord
 }
 
-func readCsvFile2d(filepath string, comma rune, skiplines int) [][]string {
+func readCsvFile2d(filepath string, comma rune, skiplines int) [][]int {
 	records, fieldsPerRecord := readCsvFile(filepath, comma, skiplines)
-	fmt.Println("Records", records)
-	fmt.Println("fieldsPerRecord", fieldsPerRecord)
-
 	recordSize := len(records)
-	_ = recordSize
-
-	fmt.Printf("mat = %v  %T\n", mat, mat)
+	//fmt.Println("Records", records)
+	fmt.Println("fieldsPerRecord", fieldsPerRecord)
+	fmt.Println("recordSize", recordSize)
 
 	mat := make([][]int, 0)
+	var err1 error
 
 	for row := 0; row < recordSize; row++ {
-		lin := make([]int, 0)
+
+		lin := make([]int, fieldsPerRecord)
 		for col := 0; col < fieldsPerRecord; col++ {
-			lin[col], _ = strconv.Atoi(records[row][col])
+			lin[col], err1 = strconv.Atoi(records[row][col])
+			if err1 != nil {
+				fmt.Println("Error reading line #", row, err1)
+			}
 		}
 		mat = append(mat, lin)
-		fmt.Println(lin)
+		//fmt.Println(lin)
 	}
 
-	fmt.Println("mat = ", mat)
-	return records
+	fmt.Println("mat[0][0] = ", &mat[0][0])
+	fmt.Println("mat[1][0] = ", &mat[1][0])
+	fmt.Printf("mat Type = %T ", mat)
+	return mat
 }
 
 /*

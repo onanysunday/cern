@@ -23,16 +23,15 @@ func main() {
 	fmt.Println("Chas Yo")
 	//x := Multp()
 	//fmt.Println("x= ", x)
-	//s := readCsvFile1d_int("C:/Users/onany/OneDrive/Documents/krud/sort1d.csv", 0)
 	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort2d.csv", 1)
 	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort_1line.csv", 1)
 	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort_empty.csv", 1)
-	//fmt.Println(s)
 	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx.txt"
 	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
-	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_7x.txt"
-	skiplines := 1
-	//records := readCsvFile(filename, skiplines)
+	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
+	skiplines := 0
+	_ = filename
+	_ = skiplines
 	records := readCsvFile2d(filename, ',', skiplines)
 	recordSize := len(records)
 	fmt.Println("#Records = ", recordSize)
