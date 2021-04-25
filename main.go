@@ -28,21 +28,20 @@ func main() {
 	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort_empty.csv", 1)
 	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx.txt"
 	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
-	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
-	skiplines := 0
-	_ = filename
-	_ = skiplines
-	records := readCsvFile2d(filename, ',', skiplines)
+	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_SCALED.txt"
+	skiplines := 1
+	records := readCsvFile2d_64(filename, ',', skiplines)
 	recordSize := len(records)
 	fmt.Println("#Records = ", recordSize)
 	fmt.Printf("records type ' %T\n", records)
 	fmt.Println(records[0])
 
-	//var grid [262144][131072]byte
-	//grid[1000][1000] = 99
-
 	PrintMemUsage()
 
-	//fmt.Println("m = ", grid[1000][1000])
+	var sum int64
+	for row := 0; row < 5594672; row++ {
+		sum += records[row][5]
+	}
+	fmt.Println("Sales Sum = ", sum)
 
 }
