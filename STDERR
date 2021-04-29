@@ -95,38 +95,6 @@ out:
 	return mat
 }
 
-func readCsvFile2d_float32(filepath string, comma rune, skiplines int) [][]float32 {
-	records, fieldsPerRecord := readCsvFile(filepath, comma, skiplines)
-	recordSize := len(records)
-	//fmt.Println("Records", records)
-	fmt.Println("fieldsPerRecord", fieldsPerRecord)
-	fmt.Println("recordSize", recordSize)
-
-	mat := make([][]float32, 0)
-	var err1 error
-	var x float64
-out:
-	for row := 0; row < recordSize; row++ {
-		lin := make([]float32, fieldsPerRecord)
-		for col := 0; col < fieldsPerRecord; col++ {
-			x, err1 = strconv.ParseFloat(records[row][col], 64)
-			if err1 != nil {
-				fmt.Println("Error reading line #", row, err1)
-				break out
-			}
-			lin[col] = float32(x)
-		}
-		mat = append(mat, lin)
-		//fmt.Println(lin)
-	}
-
-	fmt.Println("&mat[0][0] = ", &mat[0][5])
-	fmt.Println("mat[0][0] = ", mat[0][5])
-	//fmt.Println("mat[1][0] = ", &mat[1][0])
-	fmt.Printf("mat Type = %T\n", mat)
-	return mat
-}
-
 /*
 func zzz_readCsvFile1d(filepath string, skiplines int) []string {
 	records, fieldsPerRecord := readCsvFile(filepath, skiplines)

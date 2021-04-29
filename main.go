@@ -30,7 +30,8 @@ func main() {
 	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
 	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_SCALED.txt"
 	skiplines := 1
-	records := readCsvFile2d_64(filename, ',', skiplines)
+	//	records := readCsvFile2d_64(filename, ',', skiplines)
+	records := readCsvFile2d_float32(filename, ',', skiplines)
 	recordSize := len(records)
 	fmt.Println("#Records = ", recordSize)
 	fmt.Printf("records type ' %T\n", records)
@@ -38,7 +39,7 @@ func main() {
 
 	PrintMemUsage()
 
-	var sum int64
+	var sum float32
 	for row := 0; row < 5594672; row++ {
 		sum += records[row][5]
 	}
