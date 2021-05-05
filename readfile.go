@@ -23,12 +23,12 @@ func readCsvFile(filepath string, comma rune, skiplines int) ([][]string, int) {
 		topline, err1 := csvReader.Read()
 		_ = topline
 		if err1 != nil {
-			log.Fatal("Could not read top line "+filepath, err1)
+			log.Fatal("readCsvFile: Could not read top line "+filepath, err1)
 		}
 	}
 	records, err := csvReader.ReadAll()
 	if err != nil {
-		log.Fatal("Unable to parse file as CSV for "+filepath, err)
+		log.Fatal("readCsvFile: Unable to parse file as CSV for "+filepath, err)
 	}
 	//fmt.Println("Size of array = ", len(records))
 	//fmt.Println("Size of arrayz = ", len(records[0]))
@@ -51,7 +51,7 @@ out:
 		for col := 0; col < fieldsPerRecord; col++ {
 			lin[col], err1 = strconv.Atoi(records[row][col])
 			if err1 != nil {
-				fmt.Println("Error reading line #", row, err1)
+				fmt.Println("Error reading line int #", row, err1)
 				break out
 			}
 		}
@@ -59,9 +59,9 @@ out:
 		//fmt.Println(lin)
 	}
 
-	fmt.Println("mat[0][0] = ", &mat[0][0])
-	fmt.Println("mat[1][0] = ", &mat[1][0])
-	fmt.Printf("mat Type = %T ", mat)
+	//fmt.Println("mat[0][0] = ", &mat[0][0])
+	//fmt.Println("mat[1][0] = ", &mat[1][0])
+	//fmt.Printf("mat Type = %T ", mat)
 	return mat
 }
 
@@ -80,7 +80,7 @@ out:
 		for col := 0; col < fieldsPerRecord; col++ {
 			lin[col], err1 = strconv.ParseInt(records[row][col], 10, 64)
 			if err1 != nil {
-				fmt.Println("Error reading line #", row, err1)
+				fmt.Println("Error reading int64 line #", row, err1)
 				break out
 			}
 		}
@@ -88,10 +88,10 @@ out:
 		//fmt.Println(lin)
 	}
 
-	fmt.Println("&mat[0][0] = ", &mat[0][5])
-	fmt.Println("mat[0][0] = ", mat[0][5])
+	//fmt.Println("&mat[0][0] = ", &mat[0][5])
+	//fmt.Println("mat[0][0] = ", mat[0][5])
 	//fmt.Println("mat[1][0] = ", &mat[1][0])
-	fmt.Printf("mat Type = %T\n", mat)
+	//fmt.Printf("mat Type = %T\n", mat)
 	return mat
 }
 
@@ -111,7 +111,7 @@ out:
 		for col := 0; col < fieldsPerRecord; col++ {
 			x, err1 = strconv.ParseFloat(records[row][col], 64)
 			if err1 != nil {
-				fmt.Println("Error reading line #", row, err1)
+				fmt.Println("Error reading float32 line #", row, err1)
 				break out
 			}
 			lin[col] = float32(x)
@@ -119,11 +119,6 @@ out:
 		mat = append(mat, lin)
 		//fmt.Println(lin)
 	}
-
-	fmt.Println("&mat[0][0] = ", &mat[0][5])
-	fmt.Println("mat[0][0] = ", mat[0][5])
-	//fmt.Println("mat[1][0] = ", &mat[1][0])
-	fmt.Printf("mat Type = %T\n", mat)
 	return mat
 }
 

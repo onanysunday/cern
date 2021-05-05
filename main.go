@@ -20,15 +20,9 @@ func PrintMemUsage() {
 }
 
 func main() {
-	fmt.Println("Chas Yo")
-	//x := Multp()
-	//fmt.Println("x= ", x)
-	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort2d.csv", 1)
-	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort_1line.csv", 1)
-	//s := readCsvFile2d("C:/Users/onany/OneDrive/Documents/krud/sort_empty.csv", 1)
 	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx.txt"
-	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
-	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_SCALED.txt"
+	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_SCALED.txt"
+	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
 	skiplines := 1
 	//	records := readCsvFile2d_64(filename, ',', skiplines)
 	records := readCsvFile2d_float32(filename, ',', skiplines)
@@ -37,12 +31,12 @@ func main() {
 	fmt.Printf("records type ' %T\n", records)
 	fmt.Println(records[0])
 
-	PrintMemUsage()
+	rmat := GenerateRandomMatrix(64, 32, 0.5)
+	_ = rmat
+	Writepath := "C:/Users/onany/OneDrive/Documents/krud/matout.txt"
+	err := WriteCsvFile(rmat, Writepath, ',')
+	_ = err
 
-	var sum float32
-	for row := 0; row < 5594672; row++ {
-		sum += records[row][5]
-	}
-	fmt.Println("Sales Sum = ", sum)
+	PrintMemUsage()
 
 }
