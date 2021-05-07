@@ -31,7 +31,7 @@ func main() {
 	fmt.Printf("records type ' %T\n", records)
 	fmt.Println(records[0])
 
-	rmat := GenerateRandomMatrix(64, 32, 0.5)
+	rmat := GenerateRandomMatrix(12, 7, 0.85)
 	_ = rmat
 	Writepath := "C:/Users/onany/OneDrive/Documents/krud/matout.txt"
 	err := WriteCsvFile(rmat, Writepath, ',')

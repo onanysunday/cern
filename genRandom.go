@@ -34,7 +34,7 @@ func GenerateRandomMatrix(height int, width int, PctFull float32) [][]float32 {
 	}
 	fmt.Printf("k = %v\n", k)
 
-	fmt.Printf("&mat[63][31] = %v\n", &mat[63][31])
+	//fmt.Printf("&mat[63][31] = %v\n", &mat[63][31])
 	//fmt.Printf("&mat[0][15] = %v\n", &mat[0][15])
 	//fmt.Printf("&mat[0][31] = %v\n", &mat[0][31])
 	//fmt.Printf("&mat[1][0] = %v\n", &mat[1][0])
