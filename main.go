@@ -34,7 +34,7 @@ func main() {
 	rmat := GenerateRandomMatrix(12, 7, 0.85)
 	_ = rmat
 	Writepath := "C:/Users/onany/OneDrive/Documents/krud/matout.txt"
-	err := WriteCsvFile(rmat, Writepath, ',')
+	err := WriteCsvFile_float32(rmat, Writepath, ',')
 	_ = err
 
 	PrintMemUsage()
