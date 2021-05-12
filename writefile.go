@@ -9,7 +9,9 @@ import (
 	"strings"
 )
 
-func WriteCsvFile_float32(mat [][]float32, filepath string, comma rune) error {
+func WriteCsvFile_float32(mat [][]float32, filepath string, comma rune, wformat byte) error {
+	//  fmt can be:  e, E, f, g, G, x, X   (see FormatFloat in golang documentation)
+
 	f, err := os.Create(filepath)
 	if err != nil {
 		log.Fatal("Unable to Create Text File "+filepath, err)
@@ -25,7 +27,7 @@ func WriteCsvFile_float32(mat [][]float32, filepath string, comma rune) error {
 		var str string = ""
 		for col := 0; col <= lastcol; col++ {
 			v := float64(mat[row][col])
-			s := strconv.FormatFloat(v, 'g', -1, 32)
+			s := strconv.FormatFloat(v, wformat, -1, 32)
 			str += s + ","
 		}
 		str = strings.TrimSuffix(str, ",")
@@ -37,10 +39,7 @@ func WriteCsvFile_float32(mat [][]float32, filepath string, comma rune) error {
 			fmt.Println(err)
 			return err
 		}
-		//fmt.Println("record = ", record)
 	}
-
-	fmt.Println("Done Writing File")
 	return nil
 
 }

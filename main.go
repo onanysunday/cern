@@ -2,41 +2,49 @@ package main
 
 import (
 	"fmt"
-	"runtime"
+	"math/big"
+	"time"
 )
 
-func bToMb(b uint64) uint64 {
-	return b / 1024 / 1024
-}
-
-func PrintMemUsage() {
-	var m runtime.MemStats
-	runtime.ReadMemStats(&m)
-	// For info on each, see: https://golang.org/pkg/runtime/#MemStats
-	fmt.Printf("Alloc = %v MiB", bToMb(m.Alloc))
-	fmt.Printf("\tTotalAlloc = %v MiB", bToMb(m.TotalAlloc))
-	fmt.Printf("\tSys = %v MiB", bToMb(m.Sys))
-	fmt.Printf("\tNumGC = %v\n", m.NumGC)
-}
-
 func main() {
-	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx.txt"
-	//filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_SCALED.txt"
-	filename := "C:/Users/onany/OneDrive/Documents/Data/BigFish/Y3Y_NEED_Idx_100.txt"
-	skiplines := 1
-	//	records := readCsvFile2d_64(filename, ',', skiplines)
-	records := readCsvFile2d_float32(filename, ',', skiplines)
-	recordSize := len(records)
-	fmt.Println("#Records = ", recordSize)
-	fmt.Printf("records type ' %T\n", records)
-	fmt.Println(records[0])
 
-	rmat := GenerateRandomMatrix(12, 7, 0.85)
-	_ = rmat
-	Writepath := "C:/Users/onany/OneDrive/Documents/krud/matout.txt"
-	err := WriteCsvFile_float32(rmat, Writepath, ',')
-	_ = err
+	// Initialize two big ints with the first two numbers in the sequence.
+	a := big.NewInt(0)
+	b := big.NewInt(0)
+	zero := big.NewInt(0)
 
-	PrintMemUsage()
+	// Calculate 100 factorial
 
+	I := big.NewInt(1)
+	var i int64
+	var j int64
+
+	start := time.Now()
+	for i = 0; i < 700000; i++ {
+		a = big.NewInt(1)
+		for j = 1; j <= 100; j++ {
+			I = big.NewInt(j)
+			a = a.Mul(a, I)
+		}
+	}
+	fmt.Println("Factorial Time = ", time.Since(start))
+
+	b = b.Add(a, zero) // Copy bigint a into bigint b
+
+	fmt.Printf("Vals:  %v %v\n", a, b)   // a = *big.Int, b = big.Int
+	fmt.Printf("Types: %T %T\n", a, b)   // a = *big.Int, b = big.Int
+	fmt.Printf("Addr:  %v %v\n", &a, &b) // a = *big.Int, b = big.Int
+
+	// Unwind the factorial
+	start = time.Now()
+	for i = 0; i < 700000; i++ {
+		b = b.Add(a, zero)
+		for j = 1; j <= 100; j++ {
+			I = big.NewInt(j)
+			b = b.Div(b, I)
+		}
+	}
+	fmt.Println("Unfactorial Time = ", time.Since(start))
+	fmt.Println("unf: a = ", a)
+	fmt.Println("unf: b = ", b)
 }
