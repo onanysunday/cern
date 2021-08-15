@@ -18,33 +18,31 @@ func main() {
 	I := big.NewInt(1)
 	var i int64
 	var j int64
+	var rj float64
+	var fact float64
 
 	start := time.Now()
-	for i = 0; i < 700000; i++ {
+	for i = 0; i < 700; i++ {
 		a = big.NewInt(1)
-		for j = 1; j <= 100; j++ {
+		for j = 1; j <= 170; j++ {
 			I = big.NewInt(j)
 			a = a.Mul(a, I)
 		}
 	}
+	fmt.Println("Factorial      = ", a)
 	fmt.Println("Factorial Time = ", time.Since(start))
 
-	b = b.Add(a, zero) // Copy bigint a into bigint b
-
-	fmt.Printf("Vals:  %v %v\n", a, b)   // a = *big.Int, b = big.Int
-	fmt.Printf("Types: %T %T\n", a, b)   // a = *big.Int, b = big.Int
-	fmt.Printf("Addr:  %v %v\n", &a, &b) // a = *big.Int, b = big.Int
-
-	// Unwind the factorial
 	start = time.Now()
 	for i = 0; i < 700000; i++ {
-		b = b.Add(a, zero)
-		for j = 1; j <= 100; j++ {
-			I = big.NewInt(j)
-			b = b.Div(b, I)
+		rj = 1.0
+		fact = 1.0
+		for j = 1; j <= 170; j++ {
+			rj = float64(j)
+			fact = fact * rj
 		}
 	}
-	fmt.Println("Unfactorial Time = ", time.Since(start))
-	fmt.Println("unf: a = ", a)
-	fmt.Println("unf: b = ", b)
+	fmt.Println("Factorial      = ", fact)
+	fmt.Println("Factorial Time = ", time.Since(start))
+	b = b.Add(a, zero) // Copy bigint a into bigint b
+
 }
